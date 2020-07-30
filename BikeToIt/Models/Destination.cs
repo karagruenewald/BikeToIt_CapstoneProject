@@ -1,0 +1,48 @@
+﻿using System;
+namespace BikeToIt.Models
+{
+    public class Destination
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zipcode { get; set; }
+        public string Description { get; set; }
+        public bool OutdoorSeating { get; set; }
+        public bool BikeRacks { get; set; }
+        public bool Restrooms { get; set; }
+        public bool Playground { get; set; }
+
+        //Creates foreign key in SQL
+        public int CategoryId { get; set; }
+        public DestinationCategory Category { get; set; }
+
+        //Creates foreign key in SQL
+        public int TrailId { get; set; }
+        public Trail Trail { get; set; }
+
+
+        //Picture
+
+        public Destination()
+        {
+        }
+
+        public Destination(string name, string street, string city, string state, string zipcode, string description,
+           bool outdoorSeating, bool bikeRacks, bool restrooms, bool playground)
+        {
+            Name = name;
+            Street = street;
+            City = city;
+            State = state;
+            Zipcode = zipcode;
+            Description = description;
+            OutdoorSeating = outdoorSeating;
+            BikeRacks = bikeRacks;
+            Restrooms = restrooms;
+            Playground = playground;
+        }
+    }
+}
