@@ -7,7 +7,7 @@ namespace BikeToIt.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Trail> Trails { get; set; }
+        
 
         public City()
         {

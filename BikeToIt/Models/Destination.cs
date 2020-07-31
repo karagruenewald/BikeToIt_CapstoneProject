@@ -10,6 +10,7 @@ namespace BikeToIt.Models
         public string State { get; set; }
         public string Zipcode { get; set; }
         public string Description { get; set; }
+        public string Website { get; set; }
         public bool OutdoorSeating { get; set; }
         public bool BikeRacks { get; set; }
         public bool Restrooms { get; set; }
@@ -30,7 +31,7 @@ namespace BikeToIt.Models
         {
         }
 
-        public Destination(string name, string street, string city, string state, string zipcode, string description,
+        public Destination(string name, string street, string city, string state, string zipcode, string description, string website,
            bool outdoorSeating, bool bikeRacks, bool restrooms, bool playground)
         {
             Name = name;
@@ -39,6 +40,7 @@ namespace BikeToIt.Models
             State = state;
             Zipcode = zipcode;
             Description = description;
+            Website = website;
             OutdoorSeating = outdoorSeating;
             BikeRacks = bikeRacks;
             Restrooms = restrooms;
