@@ -8,7 +8,7 @@ namespace BikeToIt.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string State { get; set; }
-        //public List<City> Cities { get; set; }
+        
         public double Distance { get; set; }
         public string SurfaceType { get; set; }
         public string Description { get; set; }

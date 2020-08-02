@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using BikeToIt.Models;
+
+namespace BikeToIt.ViewModels
+{
+    public class SearchResultsViewModel
+    {
+
+        public List<Trail> Trails { get; set; }
+        public List<City> Cities { get; set; }
+        public List<TrailCity> TrailCity { get; set; }
+        
+
+
+        public SearchResultsViewModel(List<Trail> trails, List<City> cities, List<TrailCity> trailCities) 
+        {
+
+            Trails = trails;
+            Cities = cities;
+            TrailCity = trailCities;
+            
+        }
+    }
+}
