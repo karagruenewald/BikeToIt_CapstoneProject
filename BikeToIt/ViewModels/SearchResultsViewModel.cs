@@ -8,16 +8,14 @@ namespace BikeToIt.ViewModels
     {
 
         public List<Trail> Trails { get; set; }
-        public List<City> Cities { get; set; }
         public List<TrailCity> TrailCity { get; set; }
         
 
 
-        public SearchResultsViewModel(List<Trail> trails, List<City> cities, List<TrailCity> trailCities) 
+        public SearchResultsViewModel(List<Trail> trails, List<TrailCity> trailCities) 
         {
 
             Trails = trails;
-            Cities = cities;
             TrailCity = trailCities;
             
         }

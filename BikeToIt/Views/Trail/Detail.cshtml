@@ -1,0 +1,52 @@
+﻿@model BikeToIt.ViewModels.TrailDetailViewModel
+
+
+<div class="container">
+    <div class="row bg-light">
+        <div class="col-8">
+            <p></p>
+            <h1 class="text-success">@Model.Name</h1><br />
+            <h5>
+                <span>Find the trail in: </span>
+                @foreach (TrailCity city in Model.Cities)
+                {
+                    @if (Model.Cities.IndexOf(city) == Model.Cities.Count - 1)
+                    {
+                        <span>and </span><span>@city.City.Name</span>
+                    }
+                    else
+                    {
+                        <span>@city.City.Name</span><span>, </span>
+                    }
+
+                }
+            </h5>
+
+            <p>@Model.State</p>
+            <p>Distance: @Model.Distance <span> miles</span></p>
+            <p>Surface Type: @Model.SurfaceType</p>
+            <p><h5 class="text-success">@Model.Description</h5></p>
+
+        </div>
+        <div class="col">
+            <p>trail map photo here</p>
+
+        </div>
+    </div>
+    
+    <div class="row">
+        <p ><br /><br /></p>
+    </div>
+    <div class="row bg-light">
+        <div class="col-8">
+            <table class="table">
+                <tr><th><h3 class="text-success">Check out these destinations right off the trail:</th></tr></h3>
+
+                @foreach (Destination d in Model.Destinations)
+                {
+                    <tr><td>@d.Name</td></tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

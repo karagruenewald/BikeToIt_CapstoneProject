@@ -4,11 +4,9 @@
 
 
 
-    <div class="container">
+    <div >
         <table class=" table centered-table">
             <h1>Search Results</h1>
-
-
 
             <tr>
                 <th>Trail Name</th>
@@ -23,37 +21,33 @@
             }
 
 
-
             @foreach (var trail in Model.Trails)
             {
 
                 <tr>
-                    <td >@trail.Name</td>
+                    <td><h3><a class="text-success" asp-controller="trail" asp-action="detail" asp-route-id="@trail.Id">@trail.Name</a></h3></td>
                     <td>
-                        <ul>
-                            @foreach (var c in Model.Cities)
-                            {
+                        <ul class="list-unstyled">
+                            
+                            
                                 @foreach (var city in Model.TrailCity)
                                 {
-                                    if ((trail.Id == city.TrailId) && (city.CityId == c.Id))
+                                    if (trail.Id == city.TrailId)
                                     {
-                                        <li>@c.Name</li>
+                                        <li>@city.City.Name</li>
 
 
                                     }
                                 }
-                            }
+                            
                         </ul>
                     </td>
                     <td>@trail.State</td>
-                    <td>@trail.Distance</td>
+                    <td>@trail.Distance <span> miles</span></td>
                     <td>@trail.SurfaceType</td>
 
                 </tr>
             }
-
-
-
 
 
         </table>

@@ -425,14 +425,34 @@ namespace BikeToIt.Controllers
                 }
             }
 
+            
+                
 
-            SearchResultsViewModel results = new SearchResultsViewModel(selectedTrails, resultCities, trailCities);
+            SearchResultsViewModel results = new SearchResultsViewModel(selectedTrails, trailCities);
 
 
             return View(results);
         }
 
 
-        
+        public IActionResult Detail(int id)
+        {
+            Trail theTrail = context.Trails
+                .Single(t => t.Id == id);
+
+
+            List<Destination> destinations = context.Destinations
+                .Where(t => t.TrailId == id)
+                .ToList();
+
+            List<TrailCity> theCities = context.TrailCity
+                .Where(t => t.TrailId == id)
+                .Include(t => t.City)
+                .ToList();
+
+            TrailDetailViewModel viewModel = new TrailDetailViewModel(theTrail, destinations, theCities);
+
+            return View(viewModel);
+        }
     }
 }
