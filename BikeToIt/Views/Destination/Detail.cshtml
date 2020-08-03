@@ -1,0 +1,63 @@
+﻿@model BikeToIt.ViewModels.DestinationDetailViewModel
+<style>
+    ul {
+        font-size: 20px;
+    }
+</style>
+    <div class="container">
+        <div class="row bg-light mb-3 p-3">
+            <div class="col-6">
+                <h3>@Model.Name</h3>
+                <small class="text-muted">@Model.CategoryName</small><br /><br />
+                <span>@Model.Street</span><br />
+                <span>@Model.City,</span><span> @Model.State</span><span> @Model.Zipcode</span><br /><br />
+                <p><a href=@Model.Website>@Model.Website<a/></p>
+
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <img src="~/images/@Model.Image" alt="@Model.Name" height="300" width="500">
+                </div>
+                
+
+            </div>
+        </div>
+        <div class="row bg-light mt-3 p-3">
+            <div class="col-12">
+                <p><h5>@Model.Description</h5></p>
+            </div>
+        </div>
+        <div class="row bg-light mt-3 pt-4 pr-3">
+            <div class="col-12">
+                <ul >
+                    <p class="list-inline-item">Amenities: </p>
+                    @if (Model.OutdoorSeating == true)
+                    {
+                        <li class="badge badge-secondary badge-success list-inline-item">Outdoor Seating</li>
+                    }
+                    @if (Model.BikeRacks == true)
+                    {
+                        <li class="badge  badge-secondary badge-success list-inline-item">Bike Rack</li>
+                    }
+                    @if (Model.Restrooms == true)
+                    {
+                        <li class="badge badge-secondary badge-success list-inline-item">Restrooms</li>
+                    }
+                    @if (Model.Playground == true)
+                    {
+                        <li class="badge badge-secondary badge-success list-inline-item">Playground</li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="row bg-light mt-3 pt-3 pl-3 pr-3">
+            <div class="col-12">
+                <p><a class="text-success" asp-controller="Trail" asp-action="Detail" asp-route-id="@Model.TrailId">Back to @Model.TrailName</a></p>
+            </div>
+        </div>
+
+
+
+
+
+    </div>

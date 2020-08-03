@@ -48,6 +48,9 @@ namespace BikeToIt.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -109,6 +112,9 @@ namespace BikeToIt.Migrations
 
                     b.Property<double>("Distance")
                         .HasColumnType("double");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");

@@ -11,6 +11,7 @@ namespace BikeToIt.ViewModels
     {
         
         public string Name { get; set; }
+        public int StateId { get; set; }
         public List<SelectListItem> State { get; set; }
         public int CityId { get; set; }
         public List<SelectListItem> City { get; set; }

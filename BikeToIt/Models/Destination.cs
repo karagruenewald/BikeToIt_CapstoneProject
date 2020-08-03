@@ -15,6 +15,7 @@ namespace BikeToIt.Models
         public bool BikeRacks { get; set; }
         public bool Restrooms { get; set; }
         public bool Playground { get; set; }
+        public string Image { get; set; }
 
         //Creates foreign key in SQL
         public int CategoryId { get; set; }
@@ -32,7 +33,7 @@ namespace BikeToIt.Models
         }
 
         public Destination(string name, string street, string city, string state, string zipcode, string description, string website,
-           bool outdoorSeating, bool bikeRacks, bool restrooms, bool playground)
+           bool outdoorSeating, bool bikeRacks, bool restrooms, bool playground, string image)
         {
             Name = name;
             Street = street;
@@ -45,6 +46,7 @@ namespace BikeToIt.Models
             BikeRacks = bikeRacks;
             Restrooms = restrooms;
             Playground = playground;
+            Image = image;
         }
     }
 }

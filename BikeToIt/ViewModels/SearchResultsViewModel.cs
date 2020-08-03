@@ -19,5 +19,10 @@ namespace BikeToIt.ViewModels
             TrailCity = trailCities;
             
         }
+
+        public SearchResultsViewModel()
+        {
+
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace BikeToIt.Models
         public string SurfaceType { get; set; }
         public string Description { get; set; }
         public List<Destination> Destinations { get; set; }
-        //Picture
+        public string Image { get; set; }
 
 
         public Trail()

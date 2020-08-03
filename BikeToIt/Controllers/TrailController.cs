@@ -442,6 +442,7 @@ namespace BikeToIt.Controllers
 
 
             List<Destination> destinations = context.Destinations
+                .Include(t => t.Category)
                 .Where(t => t.TrailId == id)
                 .ToList();
 

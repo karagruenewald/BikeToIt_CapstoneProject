@@ -1,11 +1,17 @@
 ﻿@model BikeToIt.ViewModels.SearchTrailViewModel
 
-
+    <div class="jumbotron">
+        <h1 class="display-4 text-success" >Welcome to Bike To It!</h1>
+        <p class="lead">Explore all your bike trails have to offer. Find local spots for food, shopping, camping, and more, all right off the trails!</p>
+        <hr class="my-4">
+        
+        <a class="btn btn-success btn-lg" href="mailto: karagruenewald@gmail.com" role="button">Contact Us</a>
+    </div>
 
 <form method="post" asp-controller="Trail" asp-action="Results">
     <div class="container">
         <div class="form-group">
-            <h1>Search for Trails and Trail Destinations:</h1>
+            <h2 class="display-5 text-success">Search for Trails and Trail Destinations</h2>
         </div>
         <div class="form-group">
             <label asp-for="Name"></label>
@@ -75,7 +81,7 @@
         }*@
         </div>
 
-        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Search" />
+        <input class="btn btn-success btn-lg btn-block" type="submit" value="Search" />
     </div>
 
 </form>

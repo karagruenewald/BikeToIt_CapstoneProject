@@ -2,49 +2,61 @@
 
 
 <div class="container">
-    <div class="row bg-light">
-        <div class="col-8">
-            <p></p>
-            <h1 class="text-success">@Model.Name</h1><br />
-            <h5>
-                <span>Find the trail in: </span>
-                @foreach (TrailCity city in Model.Cities)
-                {
-                    @if (Model.Cities.IndexOf(city) == Model.Cities.Count - 1)
-                    {
-                        <span>and </span><span>@city.City.Name</span>
-                    }
-                    else
-                    {
-                        <span>@city.City.Name</span><span>, </span>
-                    }
+    <div class="row bg-light mb-3 p-3">
+        <div class="col-12">
 
+            <h1 class="text-success pt-3">@Model.Name</h1>
+
+            <span>Find the trail in: </span>
+            @foreach (TrailCity city in Model.Cities)
+            {
+                @if (Model.Cities.IndexOf(city) == Model.Cities.Count - 1)
+                {
+                    <span>and </span><span>@city.City.Name</span>
                 }
-            </h5>
+                else
+                {
+                    <span>@city.City.Name</span><span>, </span>
+                }
+
+            }
+
 
             <p>@Model.State</p>
             <p>Distance: @Model.Distance <span> miles</span></p>
-            <p>Surface Type: @Model.SurfaceType</p>
-            <p><h5 class="text-success">@Model.Description</h5></p>
-
+            <p>Surface Type: @Model.SurfaceType</p><br /><br />
+            <p><h6>@Model.Description</h6></p>
         </div>
-        <div class="col">
-            <p>trail map photo here</p>
 
-        </div>
-    </div>
-    
-    <div class="row">
-        <p ><br /><br /></p>
+        
     </div>
     <div class="row bg-light">
-        <div class="col-8">
+
+
+        <div class="col">
+            <div>
+
+                <img src="~/images/@Model.Image" alt="@Model.Name" style="width: 75%; margin-left: auto; margin-right: auto; display: block;">
+            </div>
+        </div>
+
+    </div>
+    
+    
+    
+    <div class="row bg-light mt-3 p-3">
+        <div class="col-12">
+            <h4 class="text-success pt-2">Check out these destinations right off the trail:</h4><br />
             <table class="table">
-                <tr><th><h3 class="text-success">Check out these destinations right off the trail:</th></tr></h3>
+
 
                 @foreach (Destination d in Model.Destinations)
                 {
-                    <tr><td>@d.Name</td></tr>
+                    <tr>
+                        <td><u><a class="text-dark" asp-controller="Destination" asp-action="Detail" asp-route-id="@d.Id">@d.Name</a></u></td>
+                        <td>@d.Category.Name</td>
+
+                    </tr>
                 }
             </table>
         </div>

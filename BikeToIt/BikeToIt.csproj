@@ -8,6 +8,8 @@
     <Folder Include="Data\" />
     <Folder Include="Views\Trail\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Views\Destination\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.2" />

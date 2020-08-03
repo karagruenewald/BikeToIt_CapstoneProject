@@ -14,7 +14,7 @@ namespace BikeToIt.ViewModels
         public string Description { get; set; }
         public List<TrailCity> Cities { get; set; }
         public List<Destination> Destinations { get; set; }
-
+        public string Image { get; set; }
 
 
 
@@ -28,6 +28,13 @@ namespace BikeToIt.ViewModels
             Description = theTrail.Description;
             Destinations = destinations;
             Cities = cities;
+            Image = theTrail.Image;
+            
+
+        }
+
+        public TrailDetailViewModel()
+        {
 
         }
     }
