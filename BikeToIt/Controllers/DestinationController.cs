@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BikeToIt.Data;
 using BikeToIt.Models;
 using BikeToIt.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -15,11 +17,13 @@ namespace BikeToIt.Controllers
     public class DestinationController : Controller
     {
         private TrailDbContext context;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
 
-        public DestinationController(TrailDbContext dbContext)
+        public DestinationController(TrailDbContext dbContext, IWebHostEnvironment hostEnvironment)
         {
             context = dbContext;
+            webHostEnvironment = hostEnvironment;
         }
 
         // GET: /<controller>/
@@ -60,6 +64,8 @@ namespace BikeToIt.Controllers
         [HttpPost]
         public IActionResult Add(AddDestinationViewModel viewModel)
         {
+            string uniqueFileName = UploadedFile(viewModel);
+
             if (ModelState.IsValid)
             {
                 DestinationCategory category = context.DestinationCategories.Find(viewModel.CategoryId);
@@ -82,7 +88,8 @@ namespace BikeToIt.Controllers
                     Category = category,
                     Trail = trail,
                     CategoryId = viewModel.CategoryId,
-                    TrailId = viewModel.TrailId
+                    TrailId = viewModel.TrailId,
+                    Image = uniqueFileName
 
                 };
 
@@ -94,6 +101,7 @@ namespace BikeToIt.Controllers
                 return Redirect("/destination/detail/"+id);
             }
 
+            //repopulate SelectListItems
             List<DestinationCategory> categories = context.DestinationCategories.ToList();
             List<Trail> trails = context.Trails.ToList();
 
@@ -124,6 +132,25 @@ namespace BikeToIt.Controllers
 
 
             return View(viewModel);
+        }
+
+        //helper function for images
+        private string UploadedFile(AddDestinationViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.Image != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using(var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.Image.CopyTo(fileStream);
+                }
+
+            }
+            return uniqueFileName;
         }
 
     }

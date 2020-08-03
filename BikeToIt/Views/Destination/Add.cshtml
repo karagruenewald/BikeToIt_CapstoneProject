@@ -1,6 +1,6 @@
 ﻿@model BikeToIt.ViewModels.AddDestinationViewModel
 
-    <form method="post" asp-controller="Destination" asp-action="Add">
+    <form enctype="multipart/form-data" method="post" asp-controller="Destination" asp-action="Add">
         <div class="container">
             <div class="form-group">
                 <h2 class="display-5 text-success">Add a Bike Friendly Destination</h2>
@@ -8,7 +8,7 @@
             <div class="form-group">
                 <label asp-for="CategoryId">Category</label>
                 <select class="form-control form-control-lg" asp-for="CategoryId" asp-items="Model.Category"></select>
-                
+
             </div>
             <div class="form-group">
                 <label asp-for="TrailId">Trail</label>
@@ -46,7 +46,7 @@
                         <span style="color:red" asp-validation-for="Zipcode"></span>
                     </div>
                 </div>
-      
+
             </div>
 
             <div class="form-group">
@@ -56,7 +56,7 @@
             <div class="form-group">
                 <label asp-for="Website"></label>
                 <input class="form-control form-control-lg" asp-for="Website" type="text" />
-                
+
             </div>
 
 
@@ -64,30 +64,48 @@
                 <label>Does it have: </label><br />
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" asp-for="OutdoorSeating" type="checkbox"/>
+                    <input class="form-check-input" asp-for="OutdoorSeating" type="checkbox" />
                     <label class="form-check-label" asp-for="OutdoorSeating"></label>
-                        
+
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" asp-for="BikeRacks"type="checkbox"/>
+                    <input class="form-check-input" asp-for="BikeRacks" type="checkbox" />
                     <label class="form-check-label" asp-for="BikeRacks"></label>
-                        
+
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" asp-for="Restrooms"type="checkbox"/>
+                    <input class="form-check-input" asp-for="Restrooms" type="checkbox" />
                     <label class="form-check-label" asp-for="Restrooms">
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" asp-for="Playground"type="checkbox"/>
+                    <input class="form-check-input" asp-for="Playground" type="checkbox" />
                     <label class="form-check-label" asp-for="Playground">
                     </label>
                 </div>
-                
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Image">Upload Image</label>
+                <div class="custom-file">
+                    <input asp-for="Image" class="custom-file-input" id="customFile" />
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+
 
             </div>
 
             <input class="btn btn-success btn-lg btn-block" type="submit" value="Add" />
         </div>
+
+        @section scripts{
+            <script type="text/javascript">// for name of file to appear on upon selection
+                $(".custom-file-input").on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                });</script>
+        }
+
+
 
     </form>

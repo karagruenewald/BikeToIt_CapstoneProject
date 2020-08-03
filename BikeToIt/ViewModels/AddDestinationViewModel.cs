@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using BikeToIt.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BikeToIt.ViewModels
@@ -46,7 +47,7 @@ namespace BikeToIt.ViewModels
         public int TrailId { get; set; }
         public List<SelectListItem> Trail { get; set; }
         
-        public string Image { get; set; }
+        public IFormFile Image { get; set; }
 
 
         public AddDestinationViewModel(List<DestinationCategory> categories, List<Trail> trails)
