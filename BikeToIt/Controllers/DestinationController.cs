@@ -6,6 +6,7 @@ using BikeToIt.Data;
 using BikeToIt.Models;
 using BikeToIt.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -88,11 +89,42 @@ namespace BikeToIt.Controllers
                 context.Destinations.Add(newDestination);
                 context.SaveChanges();
 
-                return Redirect("/destination/detail");
+                int id = newDestination.Id;
+
+                return Redirect("/destination/detail/"+id);
             }
-            
+
+            List<DestinationCategory> categories = context.DestinationCategories.ToList();
+            List<Trail> trails = context.Trails.ToList();
+
+            List<SelectListItem> categoryList = new List<SelectListItem>();
+
+            foreach (var c in categories)
+            {
+                categoryList.Add(new SelectListItem
+                {
+                    Value = c.Id.ToString(),
+                    Text = c.Name
+                });
+            }
+            List<SelectListItem>trailList = new List<SelectListItem>();
+
+            foreach (var t in trails)
+            {
+                trailList.Add(new SelectListItem
+                {
+                    Value = t.Id.ToString(),
+                    Text = t.Name
+                });
+
+            }
+
+            viewModel.Category = categoryList;
+            viewModel.Trail = trailList;
+
 
             return View(viewModel);
         }
+
     }
 }

@@ -30,17 +30,20 @@
 
         
     </div>
-    <div class="row bg-light">
+    @if(Model.Image != null)
+    {
 
-
-        <div class="col">
-            <div>
-
-                <img src="~/images/@Model.Image" alt="@Model.Name" style="width: 75%; margin-left: auto; margin-right: auto; display: block;">
+        <div class="row bg-light">
+            <div class="col">
+                <div>
+                    <img src="~/images/@Model.Image" alt="@Model.Name" style="width: 75%; margin-left: auto; margin-right: auto; display: block;">
+                </div>
             </div>
         </div>
 
-    </div>
+
+    }
+    
     
     
     
