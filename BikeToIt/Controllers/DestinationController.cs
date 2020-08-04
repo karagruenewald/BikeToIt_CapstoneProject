@@ -153,5 +153,70 @@ namespace BikeToIt.Controllers
             return uniqueFileName;
         }
 
+        public IActionResult Edit(int id)
+        {
+            Destination d = context.Destinations.Find(id);
+            List<DestinationCategory> dc = context.DestinationCategories.ToList();
+            List<Trail> t = context.Trails.ToList();
+
+            EditDestinationViewModel viewModel = new EditDestinationViewModel(d, dc, t);
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditDestinationViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Destination destination = context.Destinations.Find(viewModel.Id);
+
+                destination.Name = viewModel.Name;
+                destination.Street = viewModel.Street;
+                destination.City = viewModel.City;
+                destination.State = viewModel.State;
+                destination.Zipcode = viewModel.Zipcode;
+                destination.Description = viewModel.Description;
+                destination.Website = viewModel.Website;
+                destination.OutdoorSeating = viewModel.OutdoorSeating;
+                destination.BikeRacks = viewModel.BikeRacks;
+                destination.Restrooms = viewModel.Restrooms;
+                destination.Playground = viewModel.Playground;
+
+                if(viewModel.Image != null)
+                {
+                    string uniqueFileName = NewUploadedFile(viewModel);
+                    destination.Image = uniqueFileName;
+                }
+                else
+                {
+                    destination.Image = destination.Image;
+                }
+
+            }
+            context.SaveChanges();
+            return Redirect("/Destination/Detail/" + viewModel.Id);
+
+
+        }
+
+        private string NewUploadedFile(EditDestinationViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.Image != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.Image.CopyTo(fileStream);
+                }
+
+            }
+            return uniqueFileName;
+        }
+
     }
 }

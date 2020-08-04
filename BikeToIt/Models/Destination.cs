@@ -47,6 +47,9 @@ namespace BikeToIt.Models
             Restrooms = restrooms;
             Playground = playground;
             Image = image;
+
+
+
         }
     }
 }

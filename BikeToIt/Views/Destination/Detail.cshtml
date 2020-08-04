@@ -55,8 +55,11 @@
             </div>
         </div>
         <div class="row bg-light mt-3 pt-3 pl-3 pr-3">
-            <div class="col-12">
-                <p><a class="text-success" asp-controller="Trail" asp-action="Detail" asp-route-id="@Model.TrailId">Back to @Model.TrailName</a></p>
+            <div class="col-6">
+                <p><a class="text-success"asp-controller="Trail" asp-action="Detail" asp-route-id="@Model.TrailId"> <--Back to @Model.TrailName</a></p>
+            </div>
+            <div class="col-6">
+                <p class="text-right"><a class="text-success" asp-controller="Destination" asp-action="Edit" asp-route-id="@Model.Id">Edit @Model.Name--></a></p>
             </div>
         </div>
 
