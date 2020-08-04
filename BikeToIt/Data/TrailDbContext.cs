@@ -1,10 +1,12 @@
 ﻿using System;
 using BikeToIt.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BikeToIt.Data
 {
-    public class TrailDbContext: DbContext
+    public class TrailDbContext: IdentityDbContext<IdentityUser>
     {
         public DbSet<Trail> Trails { get; set; }
         public DbSet<Destination> Destinations { get; set; }
@@ -20,6 +22,8 @@ namespace BikeToIt.Data
         {
             modelBuilder.Entity<TrailCity>()
                 .HasKey(tc => new { tc.TrailId, tc.CityId });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
