@@ -25,6 +25,8 @@ namespace BikeToIt.Models
         public int TrailId { get; set; }
         public Trail Trail { get; set; }
 
+        public string UserId { get; set; }
+
 
         //Picture
 

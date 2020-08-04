@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using BikeToIt.Data;
 using BikeToIt.Models;
 using BikeToIt.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -14,16 +16,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BikeToIt.Controllers
 {
+    [Authorize]
     public class DestinationController : Controller
     {
         private TrailDbContext context;
         private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly UserManager<IdentityUser> _userManager;
 
 
-        public DestinationController(TrailDbContext dbContext, IWebHostEnvironment hostEnvironment)
+        public DestinationController(TrailDbContext dbContext, IWebHostEnvironment hostEnvironment, UserManager<IdentityUser> userManager)
         {
             context = dbContext;
             webHostEnvironment = hostEnvironment;
+            _userManager = userManager;
         }
 
         // GET: /<controller>/
@@ -32,6 +37,7 @@ namespace BikeToIt.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Detail(int id)
         {
             Destination destination = context.Destinations
@@ -66,8 +72,12 @@ namespace BikeToIt.Controllers
         {
             string uniqueFileName = UploadedFile(viewModel);
 
+           
+
             if (ModelState.IsValid)
             {
+                var userId = _userManager.GetUserId(User);
+
                 DestinationCategory category = context.DestinationCategories.Find(viewModel.CategoryId);
                 Trail trail = context.Trails.Find(viewModel.TrailId);
 
@@ -89,7 +99,8 @@ namespace BikeToIt.Controllers
                     Trail = trail,
                     CategoryId = viewModel.CategoryId,
                     TrailId = viewModel.TrailId,
-                    Image = uniqueFileName
+                    Image = uniqueFileName,
+                    UserId = userId
 
                 };
 
