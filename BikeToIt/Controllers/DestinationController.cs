@@ -17,7 +17,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BikeToIt.Controllers
 {
-    [Authorize]
+
     public class DestinationController : Controller
     {
         private TrailDbContext context;
@@ -32,7 +32,7 @@ namespace BikeToIt.Controllers
             _userManager = userManager;
         }
 
-        // GET: /<controller>/
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             List<Destination> alldestinations = context.Destinations
@@ -54,14 +54,15 @@ namespace BikeToIt.Controllers
 
             Trail trail = context.Trails
                 .Single(t => t.Id == destination.TrailId);
-                
+
 
             DestinationDetailViewModel theDestination = new DestinationDetailViewModel(destination, categories, trail);
             return View(theDestination);
-                
-                
+
+
         }
 
+        [Authorize]
         public IActionResult Add()
         {
 
@@ -73,6 +74,7 @@ namespace BikeToIt.Controllers
             return View(destination);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Add(AddDestinationViewModel viewModel)
         {
@@ -169,7 +171,7 @@ namespace BikeToIt.Controllers
             }
             return uniqueFileName;
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {
             Destination d = context.Destinations.Find(id);
@@ -180,7 +182,7 @@ namespace BikeToIt.Controllers
 
             return View(viewModel);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Edit(EditDestinationViewModel viewModel)
         {
@@ -234,7 +236,7 @@ namespace BikeToIt.Controllers
             }
             return uniqueFileName;
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
 
@@ -244,7 +246,7 @@ namespace BikeToIt.Controllers
 
             return View(destination);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Delete(Destination model)
         {
