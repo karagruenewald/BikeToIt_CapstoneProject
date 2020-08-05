@@ -1,87 +1,63 @@
-﻿@model BikeToIt.ViewModels.SearchTrailViewModel
+﻿@using BikeToIt.ViewModels
+@model AllTrailsViewModel
 
-    <div class="jumbotron">
-        <h1 class="display-4 text-success" >Welcome to Bike To It!</h1>
-        <p class="lead">Explore all your bike trails have to offer. Find local spots for food, shopping, camping, and more, all right off the trails!</p>
-        <hr class="my-4">
-        
-        <a class="btn btn-success btn-lg" href="mailto: karagruenewald@gmail.com" role="button">Contact Us</a>
-    </div>
-
-<form method="post" asp-controller="Trail" asp-action="Results">
     <div class="container">
-        <div class="form-group">
-            <h2 class="display-5 text-success">Search for Trails and Trail Destinations</h2>
-        </div>
-        <div class="form-group">
-            <label asp-for="Name"></label>
-            <input class="form-control form-control-lg" asp-for="Name" type="text" />
-        </div>
-        <div class="form-group">
-            <label asp-for="State"></label>
-            <select class="form-control form-control-lg" asp-for="State" asp-items="Model.State" name="state"></select>
-        </div>
-        <div class="form-group">
-            <label asp-for="CityId">City</label>
-            <select class="form-control form-control-lg" asp-for="CityId" asp-items="Model.City" name="city"></select>
-        </div>
-        <div class="form-group">
-            <label asp-for="Distance"></label>
-            <input class="form-control form-control-lg" asp-for="Distance" value="" />
-        </div>
-        <div class="form-group">
-            <label asp-for="SurfaceType"></label>
-            <input class="form-control form-control-lg" placeholder="Search for asphalt, gravel, limestone, etc." asp-for="SurfaceType" /><br />
-            <span></span>
-        </div>
+        <table class=" table table-sm centered-table">
+            <h1 class="text-success">All Trails</h1>
 
-        <div class="form-group">
-            <label>Select trails with certain destinations: </label><br />
+            <tr>
+                <th>Id</th>
+                <th>Trail Name</th>
+                <th>Cities</th>
+                <th>State</th>
+                <th>Distance</th>
+                <th>Surface Type</th>
+                <th>Destinations</th>
+                <th>More Details</th>
+            </tr>
 
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="fooddrink" id="food" />
-                <label class="form-check-label" for="food">
-                    Food and Drink
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="park" id="park" />
-                <label class="form-check-label" for="park">
-                    Park
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="shop" id="shop" />
-                <label class="form-check-label" for="shop">
-                    Shop
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="camping" id="camping" />
-                <label class="form-check-label" for="camping">
-                    Camping
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="other" id="other" />
-                <label class="form-check-label" for="other">
-                    Other
-                </label>
-            </div>
-            
+            @foreach (var trail in Model.Trails)
+            {
+
+        <tr>
+            <td>@trail.Id</td>
+            <td>@trail.Name</td>
+            <td>
+                <ul class="list-unstyled">
 
 
-            @*@foreach (var category in Model.DestinationCategory)
-        {                                                                               //park
-            <input class="form-control form-control-lg" asp-for="@Model.DestinationCategoryCheckbox " type="checkbox" name="@category.Name)" />
-            <label asp-for="@category.Id">@category.Name</label>
-            <input asp-for="@category.Id" type="hidden" />
-            <input asp-for="@category.Name" type="hidden" />
+                    @foreach (var city in Model.TrailCity)
+                    {
+                        if (trail.Id == city.TrailId)
+                        {
+                            <li>@city.City.Name</li>
 
-        }*@
-        </div>
 
-        <input class="btn btn-success btn-lg btn-block" type="submit" value="Search" />
+                        }
+                    }
+
+                </ul>
+            </td>
+            <td>@trail.State</td>
+            <td>@trail.Distance <span> miles</span></td>
+            <td>@trail.SurfaceType</td>
+            <td>
+                <ul class="list-group">
+                    @foreach (var d in trail.Destinations)
+                    {
+                        <li class="list-group-item">@d.Name</li>
+                    }
+                </ul>
+            </td>
+            <td><a class="btn btn-success text-light" asp-controller="Trail" asp-action="Detail" asp-route-id="@trail.Id">Detail Page</a></td>
+        </tr>
+            }
+
+
+
+
+
+
+
+        </table>
     </div>
-
-</form>

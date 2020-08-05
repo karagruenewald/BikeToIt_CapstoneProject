@@ -25,6 +25,25 @@ namespace BikeToIt.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
+            List<Trail> allTrails = context.Trails
+                .Include(t => t.Destinations)
+                .ToList();
+
+            List<TrailCity> cities = context.TrailCity
+                .Include(c => c.City)
+                .Include(c => c.Trail)
+                .ToList();
+
+            AllTrailsViewModel viewModel = new AllTrailsViewModel(allTrails, cities);
+
+            return View(viewModel);
+        }
+
+
+
+
+        public IActionResult Search()
+        {
             
             List<string> states = context.Trails.OrderBy(s => s.State).Select(s => s.State).Distinct().ToList();
             List<City> cities = context.Cities.OrderBy(c => c.Name).ToList();
@@ -32,6 +51,8 @@ namespace BikeToIt.Controllers
             SearchTrailViewModel viewModel = new SearchTrailViewModel(states, cities, categories);
             return View(viewModel);
         }
+
+       
 
 
         [HttpPost]
