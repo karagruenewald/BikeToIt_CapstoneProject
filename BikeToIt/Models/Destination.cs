@@ -35,7 +35,7 @@ namespace BikeToIt.Models
         }
 
         public Destination(string name, string street, string city, string state, string zipcode, string description, string website,
-           bool outdoorSeating, bool bikeRacks, bool restrooms, bool playground, string image)
+           bool outdoorSeating, bool bikeRacks, bool restrooms, bool playground, string image, DestinationCategory destinationCategory)
         {
             Name = name;
             Street = street;
@@ -49,7 +49,7 @@ namespace BikeToIt.Models
             Restrooms = restrooms;
             Playground = playground;
             Image = image;
-
+            Category = destinationCategory;
 
 
         }

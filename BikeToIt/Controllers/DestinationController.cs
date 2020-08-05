@@ -235,5 +235,27 @@ namespace BikeToIt.Controllers
             return uniqueFileName;
         }
 
+        public IActionResult Delete(int id)
+        {
+
+            Destination destination = context.Destinations
+                .Include(d => d.Category)
+                .Single(d => d.Id == id);
+
+            return View(destination);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Destination model)
+        {
+
+            Destination destination = context.Destinations.Find(model.Id);
+
+            context.Destinations.Remove(destination);
+            context.SaveChanges();
+
+            return Redirect("/Destination");
+        }
+
     }
 }

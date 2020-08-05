@@ -1,0 +1,76 @@
+﻿@model BikeToIt.Models.Destination
+
+<div class="container">
+    <div class="row  mt-3 p-3">
+        <div col-8>
+            <h1 class="text-danger">Are you sure you want to delete this destination?</h1>
+        </div>
+        <div col-4>
+            <form asp-controller="Destination" asp-action="Delete" method="post">
+                <input class="btn btn-danger text-light ml-5" type="submit" value="DELETE"/>
+
+            </form>
+               
+            
+        </div>
+
+
+    </div>
+    <div class="row bg-light mb-3 p-3">
+        <div class="col-6">
+            <p hidden>@Model.Id</p>
+            <h3>@Model.Name</h3>
+            <small class="text-muted">@Model.Category.Name</small><br /><br />
+            <span>@Model.Street</span><br />
+            <span>@Model.City,</span><span> @Model.State</span><span> @Model.Zipcode</span><br /><br />
+            <p><a href=@Model.Website>@Model.Website<a /></p>
+
+        </div>
+        @if (Model.Image != null)
+        {
+            <div class="col-6">
+                <div class="card">
+                    <img src="~/images/@Model.Image" alt="@Model.Name" height="300" width="500">
+                </div>
+            </div>
+
+
+        }
+
+    </div>
+    <div class="row bg-light mt-3 p-3">
+        <div class="col-12">
+            <p><h5>@Model.Description</h5></p>
+        </div>
+    </div>
+    <div class="row bg-light mt-3 pt-4 pr-3">
+        <div class="col-12">
+            <ul>
+                <p class="list-inline-item">Amenities: </p>
+                @if (Model.OutdoorSeating == true)
+                {
+                    <li class="badge badge-secondary badge-success list-inline-item">Outdoor Seating</li>
+                }
+                @if (Model.BikeRacks == true)
+                {
+                    <li class="badge  badge-secondary badge-success list-inline-item">Bike Rack</li>
+                }
+                @if (Model.Restrooms == true)
+                {
+                    <li class="badge badge-secondary badge-success list-inline-item">Restrooms</li>
+                }
+                @if (Model.Playground == true)
+                {
+                    <li class="badge badge-secondary badge-success list-inline-item">Playground</li>
+                }
+            </ul>
+        </div>
+    </div>
+    
+
+
+
+
+
+</div>
+
