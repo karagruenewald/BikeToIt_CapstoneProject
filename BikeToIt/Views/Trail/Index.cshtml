@@ -13,7 +13,7 @@
                 <th>Distance</th>
                 <th>Surface Type</th>
                 <th>Destinations</th>
-                <th>More Details</th>
+                
             </tr>
 
             @foreach (var trail in Model.Trails)
@@ -49,7 +49,7 @@
                     }
                 </ul>
             </td>
-            <td><a class="btn btn-success text-light" asp-controller="Trail" asp-action="Detail" asp-route-id="@trail.Id">Detail Page</a></td>
+            <td><a class="btn btn-success text-light" asp-controller="Trail" asp-action="Detail" asp-route-id="@trail.Id">Details</a></td>
         </tr>
             }
 
