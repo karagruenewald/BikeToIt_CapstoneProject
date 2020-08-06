@@ -18,6 +18,10 @@ namespace BikeToIt.Data
         {
         }
 
+        public TrailDbContext()
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TrailCity>()

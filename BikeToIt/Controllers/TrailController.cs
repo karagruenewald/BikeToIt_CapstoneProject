@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BikeToIt.Data;
 using BikeToIt.Models;
 using BikeToIt.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,8 @@ namespace BikeToIt.Controllers
         }
 
         // lists all trails
+        [Authorize(Roles = "Admin")]
+
         public IActionResult Index()
         {
             List<Trail> allTrails = context.Trails

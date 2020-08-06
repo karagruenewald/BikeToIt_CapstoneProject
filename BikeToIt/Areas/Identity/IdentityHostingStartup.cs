@@ -20,8 +20,10 @@ namespace BikeToIt.Areas.Identity
                  options.UseMySql(
                      context.Configuration.GetConnectionString("DefaultConnection")));
 
-                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<TrailDbContext>();
+                services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddDefaultUI()
+                .AddEntityFrameworkStores<TrailDbContext>()
+                .AddDefaultTokenProviders();
             });
         }
     }
