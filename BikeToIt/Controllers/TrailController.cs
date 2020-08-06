@@ -22,7 +22,7 @@ namespace BikeToIt.Controllers
             context = dbContext;
         }
 
-        // GET: /<controller>/
+        // lists all trails
         public IActionResult Index()
         {
             List<Trail> allTrails = context.Trails
@@ -39,24 +39,25 @@ namespace BikeToIt.Controllers
             return View(viewModel);
         }
 
-
-
-
+        //trail search form
         public IActionResult Search()
-        {
-            
+        {            
             List<string> states = context.Trails.OrderBy(s => s.State).Select(s => s.State).Distinct().ToList();
             List<City> cities = context.Cities.OrderBy(c => c.Name).ToList();
             List<DestinationCategory> categories = context.DestinationCategories.ToList();
             SearchTrailViewModel viewModel = new SearchTrailViewModel(states, cities, categories);
+
+            if (TempData["emptySearch"] != null)
+            {
+                ViewBag.error = TempData["emptySearch"].ToString();
+            }
+
             return View(viewModel);
         }
 
-       
-
-
+        //results of search
         [HttpPost]
-        public IActionResult Results(SearchTrailViewModel viewModel, string state, string city, string fooddrink, string park, string shop, string camping, string other)
+        public IActionResult Results(SearchTrailViewModel viewModel, string state)
         {
 
             List<Trail> allTrails = context.Trails
@@ -68,15 +69,16 @@ namespace BikeToIt.Controllers
             List<Destination> destinations = context.Destinations.ToList();
 
             List<Trail> selectedTrails = new List<Trail>().ToList();
-
-            Console.WriteLine(state);
-            Console.WriteLine(state);
-            //if nothing is entered in search, return all results
-            if (string.IsNullOrEmpty(viewModel.Name) && string.IsNullOrEmpty(state) && string.IsNullOrEmpty(city) &&
-                (viewModel.Distance <= 0) && string.IsNullOrEmpty(viewModel.SurfaceType) && string.IsNullOrEmpty(fooddrink) && string.IsNullOrEmpty(park)
-                && string.IsNullOrEmpty(shop) && string.IsNullOrEmpty(camping) && string.IsNullOrEmpty(other))
+            
+                       
+            //if nothing is entered in search, it redirects back to the search page with error message
+            if (string.IsNullOrEmpty(viewModel.Name) && (string.IsNullOrEmpty(state)) && (viewModel.CityId == 0) &&
+                (viewModel.Distance <= 0) && string.IsNullOrEmpty(viewModel.SurfaceType) && (viewModel.FoodDrink == false) && (viewModel.Parks == false)
+                && (viewModel.Shops == false) && (viewModel.Camping == false) && (viewModel.Other == false))
             {
-                selectedTrails = allTrails;
+                TempData["emptySearch"] = "You must enter some search criteria.";
+                return Redirect("Search");
+                
             }
             else
             { 
@@ -85,6 +87,8 @@ namespace BikeToIt.Controllers
                 {
                     foreach (Trail trail in allTrails)
                     {
+                        Console.WriteLine(trail.Name.ToLower());
+                        Console.WriteLine(viewModel.Name.ToLower());
                         if (trail.Name.ToLower().Contains(viewModel.Name.ToLower()) && !selectedTrails.Contains(trail))
                         {
                             selectedTrails.Add(trail);
@@ -93,52 +97,56 @@ namespace BikeToIt.Controllers
                     }
                 }
                 //state search
-                if (viewModel.State != null)
-                {
-                    if (selectedTrails.Count > 0)
-                    {
-                        foreach (Trail trail in selectedTrails.ToList())
-                        {
-                            if (trail.State != state)
+                if (state != null)
+                {                    
+   
+                            if (selectedTrails.Count > 0)
                             {
-                                selectedTrails.Remove(trail);
+                                foreach (Trail trail in selectedTrails.ToList())
+                                {
+                                    if (trail.State != state)
+                                    {
+                                        selectedTrails.Remove(trail);
+                                    }
+                                }
+
                             }
-                        }
-                    }
-                    else
-                    {
-                        foreach (Trail trail in allTrails)
-                        {
-                            if (trail.State == state)
+                            else
                             {
-                                selectedTrails.Add(trail);
+                                foreach (Trail trail in allTrails)
+                                {
+
+                                    if (trail.State == state && (!selectedTrails.Contains(trail)))
+                                    {
+                                        selectedTrails.Add(trail);
+                                    }
+
+                                }
                             }
-                        }
-                    }
 
                 }
                 //city search
-                if (city != null)
+                if (viewModel.CityId != 0)
                 {
 
                     if (selectedTrails.Count > 0)
                     {
                         foreach (Trail trail in selectedTrails.ToList())
                         {
-                            List<string> cities = new List<string>();
+                            List<int> cities = new List<int>();
 
                             foreach (TrailCity cityPair in trailCities)
                             {
 
                                 if (cityPair.TrailId == trail.Id)
                                 {
-                                    cities.Add(cityPair.CityId.ToString());
+                                    cities.Add(cityPair.CityId);
 
                                 }
 
                             }
 
-                            if (!cities.Contains(city))
+                            if (!cities.Contains(viewModel.CityId))
                             {
                                 selectedTrails.Remove(trail);
                             }
@@ -151,7 +159,7 @@ namespace BikeToIt.Controllers
                         {
                             foreach (TrailCity cityPair in trailCities)
                             {
-                                if (cityPair.TrailId == trail.Id && cityPair.CityId.ToString() == city)
+                                if (cityPair.TrailId == trail.Id && cityPair.CityId == viewModel.CityId)
                                 {
                                     selectedTrails.Add(trail);
                                 }
@@ -160,7 +168,6 @@ namespace BikeToIt.Controllers
 
                         }
                     }
-
 
                 }
                 //distance search
@@ -213,8 +220,31 @@ namespace BikeToIt.Controllers
                     }
 
                 }
-                //food and drink search
-                if (fooddrink == "on")
+                //destination category search
+                List<int> categories = new List<int>();
+
+                if(viewModel.FoodDrink == true)
+                {
+                    categories.Add(1);
+                }
+                if (viewModel.Parks == true)
+                {
+                    categories.Add(2);
+                }
+                if (viewModel.Shops == true)
+                {
+                    categories.Add(3);
+                }
+                if (viewModel.Camping == true)
+                {
+                    categories.Add(4);
+                }
+                if (viewModel.Other == true)
+                {
+                    categories.Add(5);
+                }
+
+                if (categories.Count > 0)
                 {
                     if (selectedTrails.Count > 0)
                     {
@@ -223,195 +253,43 @@ namespace BikeToIt.Controllers
                             List<int> cats = new List<int>();
                             foreach (Destination d in destinations)
                             {
-                                if (trail.Id == d.TrailId)
+                                if (trail.Id == d.TrailId && !cats.Contains(d.CategoryId))
                                 {
                                     cats.Add(d.CategoryId);
 
                                 }
 
                             }
-                            if (!cats.Contains(1))
+                            if (!cats.OrderBy(m => m).SequenceEqual(categories.OrderBy(m => m)))
                             {
                                 selectedTrails.Remove(trail);
                             }
                         }
-
                     }
                     else
                     {
                         foreach (Trail trail in allTrails)
-                        {
-                            foreach (Destination d in destinations)
-                            {
-                                if (trail.Id == d.TrailId && d.CategoryId == 1 && !selectedTrails.Contains(trail))
-                                {
-                                    selectedTrails.Add(trail);
-                                }
-                            }
-                        }
-                    }
-
-                }
-                //park search
-                if (park == "on")
-                {
-                    if (selectedTrails.Count > 0)
-                    {
-                        foreach (Trail trail in selectedTrails.ToList())
                         {
                             List<int> cats = new List<int>();
+
                             foreach (Destination d in destinations)
                             {
-                                if (trail.Id == d.TrailId)
+                                if (trail.Id == d.TrailId && !cats.Contains(d.CategoryId))
                                 {
                                     cats.Add(d.CategoryId);
 
                                 }
-
                             }
-                            if (!cats.Contains(2))
+                            // if trail destination categories contain categories checked, add trail
+                            if (categories.All(i => cats.Contains(i)))
                             {
-                                selectedTrails.Remove(trail);
+                                selectedTrails.Add(trail);
                             }
-                        }
 
-                    }
-                    else
-                    {
-                        foreach (Trail trail in allTrails)
-                        {
-                            foreach (Destination d in destinations)
-                            {
-                                if (trail.Id == d.TrailId && d.CategoryId == 2 && !selectedTrails.Contains(trail))
-                                {
-                                    selectedTrails.Add(trail);
-                                }
-                            }
                         }
                     }
 
                 }
-
-                //shop search
-                if (shop == "on")
-                {
-                    if (selectedTrails.Count > 0)
-                    {
-                        foreach (Trail trail in selectedTrails.ToList())
-                        {
-                            List<int> cats = new List<int>();
-                            foreach (Destination d in destinations)
-                            {
-                                if (trail.Id == d.TrailId)
-                                {
-                                    cats.Add(d.CategoryId);
-                                    
-                                }
-  
-                            }
-                            if (!cats.Contains(3))
-                            {
-                                selectedTrails.Remove(trail);
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        foreach (Trail trail in allTrails)
-                        {
-                            foreach (Destination d in destinations)
-                            {
-                                if (trail.Id == d.TrailId && d.CategoryId == 3&& !selectedTrails.Contains(trail))
-                                {
-                                    selectedTrails.Add(trail);
-                                }
-                            }
-                        }
-                    }
-
-                }
-
-                //camping search
-                if (camping == "on")
-                {
-                    if (selectedTrails.Count > 0)
-                    {
-                        foreach (Trail trail in selectedTrails.ToList())
-                        {
-                            List<int> cats = new List<int>();
-                            foreach (Destination d in destinations)
-                            {
-                                if (trail.Id == d.TrailId)
-                                {
-                                    cats.Add(d.CategoryId);
-
-                                }
-
-                            }
-                            if (!cats.Contains(4))
-                            {
-                                selectedTrails.Remove(trail);
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        foreach (Trail trail in allTrails)
-                        {
-                            foreach (Destination d in destinations)
-                            {
-                                if (trail.Id == d.TrailId && d.CategoryId == 4 && !selectedTrails.Contains(trail))
-                                {
-                                    selectedTrails.Add(trail);
-                                }
-                            }
-                        }
-                    }
-
-                }
-                //other search
-                if (other == "on")
-                {
-                    if (selectedTrails.Count > 0)
-                    {
-                        foreach (Trail trail in selectedTrails.ToList())
-                        {
-                            List<int> cats = new List<int>();
-                            foreach (Destination d in destinations)
-                            {
-                                if (trail.Id == d.TrailId)
-                                {
-                                    cats.Add(d.CategoryId);
-
-                                }
-
-                            }
-                            if (!cats.Contains(5))
-                            {
-                                selectedTrails.Remove(trail);
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        foreach (Trail trail in allTrails)
-                        {
-                            foreach (Destination d in destinations)
-                            {
-                                if (trail.Id == d.TrailId && d.CategoryId == 5 && !selectedTrails.Contains(trail))
-                                {
-                                    selectedTrails.Add(trail);
-                                }
-                            }
-                        }
-                    }
-
-                }
-
-
 
             }
             List<City> allCities = context.Cities.ToList();
@@ -445,17 +323,12 @@ namespace BikeToIt.Controllers
                     }
                 }
             }
-
-            
-                
-
+                           
             SearchResultsViewModel results = new SearchResultsViewModel(selectedTrails, trailCities);
-
-
             return View(results);
         }
 
-
+        //lists details about specific trail
         public IActionResult Detail(int id)
         {
             Trail theTrail = context.Trails

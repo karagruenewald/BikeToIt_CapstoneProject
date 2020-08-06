@@ -13,17 +13,23 @@
         <div class="form-group">
             <h2 class="display-5 text-success">Search for Trails and Trail Destinations</h2>
         </div>
+        @if (ViewBag.error != null)
+        {
+            <div>
+                <h3 class="text-danger" style="text-align:center">@ViewBag.error</h3>
+            </div>
+        }
         <div class="form-group">
             <label asp-for="Name"></label>
             <input class="form-control form-control-lg" asp-for="Name" type="text" />
         </div>
         <div class="form-group">
-            <label asp-for="State"></label>
-            <select class="form-control form-control-lg" asp-for="State" asp-items="Model.State" name="state"></select>
+            <label asp-for="StateId">State</label>
+            <select class="form-control form-control-lg" asp-for="StateId" asp-items="Model.State" name="state"></select>
         </div>
         <div class="form-group">
             <label asp-for="CityId">City</label>
-            <select class="form-control form-control-lg" asp-for="CityId" asp-items="Model.City" name="city"></select>
+            <select class="form-control form-control-lg" asp-for="CityId" asp-items="Model.City"></select>
         </div>
         <div class="form-group">
             <label asp-for="Distance"></label>
@@ -36,49 +42,41 @@
         </div>
 
         <div class="form-group">
-            <label>Select trails with certain destinations: </label><br />
+            <p style="font-size: larger">Search along the route for destinations</p>
 
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="fooddrink" id="food" />
-                <label class="form-check-label" for="food">
-                    Food and Drink
-                </label>
+                <input class="form-check-input" asp-for="FoodDrink" type="checkbox" />
+                <label class="form-check-label" asp-for="FoodDrink"></label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="park" id="park" />
-                <label class="form-check-label" for="park">
+                <input class="form-check-input" asp-for="Parks" type="checkbox" />
+                <label class="form-check-label" asp-for="Parks">
                     Park
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="shop" id="shop" />
-                <label class="form-check-label" for="shop">
+                <input class="form-check-input" asp-for="Shops" type="checkbox" />
+                <label class="form-check-label" asp-for="Shops">
                     Shop
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="camping" id="camping" />
-                <label class="form-check-label" for="camping">
+                <input class="form-check-input" asp-for="Camping" type="checkbox" />
+                <label class="form-check-label" asp-for="Camping">
                     Camping
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="other" id="other" />
-                <label class="form-check-label" for="other">
+                <input class="form-check-input" asp-for="Other" type="checkbox" />
+                <label class="form-check-label" asp-for="Other">
                     Other
                 </label>
+            </div><br />
+            <div>
+                <p style="font-size: small">Selecting more than one will filter out trails that do not contain all selections.</p>
             </div>
             
 
-
-            @*@foreach (var category in Model.DestinationCategory)
-        {                                                                               //park
-            <input class="form-control form-control-lg" asp-for="@Model.DestinationCategoryCheckbox " type="checkbox" name="@category.Name)" />
-            <label asp-for="@category.Id">@category.Name</label>
-            <input asp-for="@category.Id" type="hidden" />
-            <input asp-for="@category.Name" type="hidden" />
-
-        }*@
         </div>
 
         <input class="btn btn-success btn-lg btn-block" type="submit" value="Search" />

@@ -23,18 +23,22 @@ namespace BikeToIt.ViewModels
         public string SurfaceType { get; set; }
         public int DestinationCategoryId { get; set; }
         public  List<DestinationCategory> DestinationCategory { get; set; }
-
-
-        public bool DestinationCategoryCheckbox { get; set; }
-        
+        [Display(Name="Food and Drink")]
+        public bool FoodDrink { get; set; }
+        public bool Parks { get; set; }
+        public bool Shops { get; set; }
+        public bool Camping { get; set; }
+        public bool Other { get; set; }
 
 
 
         public SearchTrailViewModel(List<string> states, List<City> cities, List<DestinationCategory> categories)
         {
             State = new List<SelectListItem>();
+            
 
-            foreach(var state in states)
+
+            foreach (var state in states)
             {
                 
                     State.Add(new SelectListItem
@@ -43,12 +47,15 @@ namespace BikeToIt.ViewModels
                         Text = state
                     });
 
-               
                 
+ 
             }
+
             State.Insert(0, new SelectListItem { Value = null, Text = "" });
 
+
             City = new List<SelectListItem>();
+
 
             foreach (var city in cities)
             {
@@ -63,8 +70,6 @@ namespace BikeToIt.ViewModels
 
 
             DestinationCategory = categories;
-
-           
 
 
         }

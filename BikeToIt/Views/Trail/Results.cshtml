@@ -17,7 +17,10 @@
             </tr>
             @if (Model.Trails.Count == 0)
             {
-                <h2 style="color:red">There are no trails that match your search.</h2>
+                <h2 style="color:red;text-align:center">There are no trails that match your search. </h2>
+                <h5 style="text-align:center" ><u><a class="text-success" asp-controller="trail" asp-action="search"> Back to Search</a></u></h5>
+
+
             }
 
 
@@ -28,18 +31,18 @@
                     <td><h4><a class="text-success" asp-controller="trail" asp-action="detail" asp-route-id="@trail.Id">@trail.Name</a></h4></td>
                     <td>
                         <ul class="list-unstyled">
-                            
-                            
-                                @foreach (var city in Model.TrailCity)
+
+
+                            @foreach (var city in Model.TrailCity)
+                            {
+                                if (trail.Id == city.TrailId)
                                 {
-                                    if (trail.Id == city.TrailId)
-                                    {
-                                        <li>@city.City.Name</li>
+                                    <li>@city.City.Name</li>
 
 
-                                    }
                                 }
-                            
+                            }
+
                         </ul>
                     </td>
                     <td>@trail.State</td>
