@@ -75,7 +75,7 @@ namespace BikeToIt.Controllers
             
                        
             //if nothing is entered in search, it redirects back to the search page with error message
-            if (string.IsNullOrEmpty(viewModel.Name) && (string.IsNullOrEmpty(state)) && (viewModel.CityId == 0) &&
+            if (string.IsNullOrEmpty(viewModel.Name) && string.IsNullOrEmpty(state) && (viewModel.CityId == 0) &&
                 (viewModel.Distance <= 0) && string.IsNullOrEmpty(viewModel.SurfaceType) && (viewModel.FoodDrink == false) && (viewModel.Parks == false)
                 && (viewModel.Shops == false) && (viewModel.Camping == false) && (viewModel.Other == false))
             {
@@ -113,7 +113,7 @@ namespace BikeToIt.Controllers
                                 }
 
                             }
-                            else
+                            else if (selectedTrails.Count == 0 && viewModel.Name == null)
                             {
                                 foreach (Trail trail in allTrails)
                                 {
@@ -155,7 +155,7 @@ namespace BikeToIt.Controllers
 
                         }
                     }
-                    else
+                    else if (selectedTrails.Count == 0 && viewModel.Name == null && state == null)
                     {
                         foreach (Trail trail in allTrails)
                         {
@@ -185,7 +185,7 @@ namespace BikeToIt.Controllers
                             }
                         }
                     }
-                    else
+                    else if (selectedTrails.Count == 0 && viewModel.Name == null && state == null && viewModel.City == null)
                     {
                         foreach (Trail trail in allTrails)
                         {
@@ -210,7 +210,7 @@ namespace BikeToIt.Controllers
                             }
                         }
                     }
-                    else
+                    else if(selectedTrails.Count == 0 && viewModel.Name == null && state == null && viewModel.City == null && viewModel.Distance == 0)
                     {
                         foreach (Trail trail in allTrails)
                         {
@@ -268,7 +268,7 @@ namespace BikeToIt.Controllers
                             }
                         }
                     }
-                    else
+                    else if (selectedTrails.Count == 0 && viewModel.Name == null && state == null && viewModel.City == null && viewModel.Distance == 0 && viewModel.SurfaceType == null)
                     {
                         foreach (Trail trail in allTrails)
                         {
