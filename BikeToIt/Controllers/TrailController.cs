@@ -30,6 +30,7 @@ namespace BikeToIt.Controllers
         {
             List<Trail> allTrails = context.Trails
                 .Include(t => t.Destinations)
+                .OrderBy(t => t.Id)
                 .ToList();
 
             List<TrailCity> cities = context.TrailCity

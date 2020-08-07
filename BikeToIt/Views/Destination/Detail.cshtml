@@ -18,7 +18,7 @@
             </div>
 
             <div class="col-4 bg-light mb-3 p-3">
-                @if (Model.Image != null)
+                @if (Model.Image != null && Model.Image != "")
                 {
 
                     <img src="~/images/@Model.Image" alt="@Model.Name" style="width: 100%; margin-left: auto; margin-right: auto; display: block;">

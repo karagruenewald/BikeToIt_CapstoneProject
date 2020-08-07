@@ -38,6 +38,7 @@ namespace BikeToIt.Controllers
             List<Destination> alldestinations = context.Destinations
                 .Include(t => t.Trail)
                 .Include(t => t.Category)
+                .OrderBy(t => t.Id)
                 .ToList();
 
             return View(alldestinations);
