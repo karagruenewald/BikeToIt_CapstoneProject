@@ -1,85 +1,84 @@
 ﻿@model BikeToIt.ViewModels.SearchTrailViewModel
 
-    <div class="jumbotron">
-        <h1 class="display-4 text-success" >Welcome to Bike To It!</h1>
-        <p class="lead">Explore all your bike trails have to offer. Find local spots for food, shopping, camping, and more, all right off the trails!</p>
-        <hr class="my-4">
-        
-        <a class="btn btn-success btn-lg" href="mailto: karagruenewald@gmail.com" role="button">Contact Us</a>
-    </div>
 
 <form method="post" asp-controller="Trail" asp-action="Results">
     <div class="container">
-        <div class="form-group">
-            <h2 class="display-5 text-success">Search for Trails and Trail Destinations</h2>
-        </div>
-        @if (ViewBag.error != null)
-        {
-            <div>
-                <h3 class="text-danger" style="text-align:center">@ViewBag.error</h3>
-            </div>
-        }
-        <div class="form-group">
-            <label asp-for="Name"></label>
-            <input class="form-control form-control-lg" asp-for="Name" type="text" />
-        </div>
-        <div class="form-group">
-            <label asp-for="StateId">State</label>
-            <select class="form-control form-control-lg" asp-for="StateId" asp-items="Model.State" name="state"></select>
-        </div>
-        <div class="form-group">
-            <label asp-for="CityId">City</label>
-            <select class="form-control form-control-lg" asp-for="CityId" asp-items="Model.City"></select>
-        </div>
-        <div class="form-group">
-            <label asp-for="Distance"></label>
-            <input class="form-control form-control-lg" asp-for="Distance" value="" />
-        </div>
-        <div class="form-group">
-            <label asp-for="SurfaceType"></label>
-            <input class="form-control form-control-lg" placeholder="Search for asphalt, gravel, limestone, etc." asp-for="SurfaceType" /><br />
-            <span></span>
-        </div>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
 
-        <div class="form-group">
-            <p style="font-size: larger">Search along the route for destinations</p>
+                <div class="form-group">
+                    <h2 class="display-5 text-success">Search for Trails</h2>
+                </div>
+                @if (ViewBag.error != null)
+                {
+                    <div>
+                        <h3 class="text-danger" style="text-align:center">@ViewBag.error</h3>
+                    </div>
+                }
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input class="form-control form-control-lg" asp-for="Name" type="text" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="StateId">State</label>
+                    <select class="form-control form-control-lg" asp-for="StateId" asp-items="Model.State" name="state"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CityId">City</label>
+                    <select class="form-control form-control-lg" asp-for="CityId" asp-items="Model.City"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Distance"></label>
+                    <input class="form-control form-control-lg" asp-for="Distance" value="" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="SurfaceType"></label>
+                    <input class="form-control form-control-lg" placeholder="Search for asphalt, gravel, limestone, etc." asp-for="SurfaceType" /><br />
+                    <span></span>
+                </div>
 
-            <div class="form-check">
-                <input class="form-check-input" asp-for="FoodDrink" type="checkbox" />
-                <label class="form-check-label" asp-for="FoodDrink"></label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" asp-for="Parks" type="checkbox" />
-                <label class="form-check-label" asp-for="Parks">
-                    Park
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" asp-for="Shops" type="checkbox" />
-                <label class="form-check-label" asp-for="Shops">
-                    Shop
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" asp-for="Camping" type="checkbox" />
-                <label class="form-check-label" asp-for="Camping">
-                    Camping
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" asp-for="Other" type="checkbox" />
-                <label class="form-check-label" asp-for="Other">
-                    Other
-                </label>
-            </div><br />
-            <div>
-                <p style="font-size: small">Selecting more than one will filter out trails that do not contain all selections.</p>
-            </div>
-            
+                <div class="form-group">
+                    <p style="font-size: larger">Search along the route for destinations</p>
 
+                    <div class="form-check">
+                        <input class="form-check-input" asp-for="FoodDrink" type="checkbox" />
+                        <label class="form-check-label" asp-for="FoodDrink"></label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" asp-for="Parks" type="checkbox" />
+                        <label class="form-check-label" asp-for="Parks">
+                            Park
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" asp-for="Shops" type="checkbox" />
+                        <label class="form-check-label" asp-for="Shops">
+                            Shop
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" asp-for="Camping" type="checkbox" />
+                        <label class="form-check-label" asp-for="Camping">
+                            Camping
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" asp-for="Other" type="checkbox" />
+                        <label class="form-check-label" asp-for="Other">
+                            Other
+                        </label>
+                    </div><br />
+                    <div>
+                        <p style="font-size: small">Selecting more than one will filter out trails that do not contain all selections.</p>
+                    </div>
+
+                </div>
+
+                <input class="btn btn-success btn-lg btn-block" type="submit" value="Search" />
+            </div>
+            <div class="col-2"></div>
         </div>
-
-        <input class="btn btn-success btn-lg btn-block" type="submit" value="Search" />
     </div>
 
 </form>

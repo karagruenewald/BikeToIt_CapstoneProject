@@ -20,7 +20,7 @@ namespace BikeToIt.Controllers
 
         public IActionResult Index()
         {
-            return Redirect("/trail");
+            return View();
         }
 
         public IActionResult Privacy()

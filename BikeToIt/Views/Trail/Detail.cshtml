@@ -2,10 +2,11 @@
 
 
 <div class="container">
-    <div class="row bg-light mb-3 p-3">
-        <div class="col-12">
+    <div class="row ">
+        <div class="col-2"></div>
+        <div class="col-8 bg-light mb-3 p-3">
 
-            <h1 class="text-success pt-3">@Model.Name</h1>
+            <h2 class="text-success pt-2">@Model.Name</h2>
 
             <span>Find the trail in: </span>
             @foreach (TrailCity city in Model.Cities)
@@ -24,44 +25,60 @@
 
             <p>@Model.State</p>
             <p>Distance: @Model.Distance <span> miles</span></p>
-            <p>Surface Type: @Model.SurfaceType</p><br /><br />
+            <p>Surface Type: @Model.SurfaceType</p><br />
             <p><h6>@Model.Description</h6></p>
-        </div>
 
-        
+        </div>
+        <div class="col-2"></div>
+
     </div>
+
     @if(Model.Image != null)
     {
 
-        <div class="row bg-light">
-            <div class="col">
+        <div class="row">
+            <div>
                 <div>
-                    <img src="~/images/@Model.Image" alt="@Model.Name" style="width: 75%; margin-left: auto; margin-right: auto; display: block;">
+                    <img src="~/images/@Model.Image" alt="@Model.Name" style="width: 60%; margin-left: auto; margin-right: auto; display: block;">
                 </div>
             </div>
         </div>
 
-
     }
     
-    
-    
-    
-    <div class="row bg-light mt-3 p-3">
-        <div class="col-12">
-            <h4 class="text-success pt-2">Check out these destinations right off the trail:</h4><br />
-            <table class="table">
-
-
-                @foreach (Destination d in Model.Destinations)
-                {
-                    <tr>
-                        <td><u><a class="text-dark" asp-controller="Destination" asp-action="Detail" asp-route-id="@d.Id">@d.Name</a></u></td>
-                        <td>@d.Category.Name</td>
-
-                    </tr>
-                }
-            </table>
+    <div class="row ">
+        <div class="col-2">
         </div>
+        <div class="col-8 bg-light mt-3 p-3">
+            <h4 class="text-success pt-2">Check out these destinations along the trail</h4><br />
+            
+                @if( Model.Destinations.Count == 0)
+                {
+                    <p class="text-secondary">This trail does not currently have any destinations. Share with us your favorite places along this route by logging in.</p>
+
+
+                }
+                else
+                {
+                    <table class="table">
+                        @foreach (Destination d in Model.Destinations)
+                        {
+                            <tr>
+                                <td><a style="font-size:medium" class="text-light badge badge-secondary badge-success p-2" asp-controller="Destination" asp-action="Detail" asp-route-id="@d.Id">@d.Name</a></td>
+                                <td class="list-inline-item text-dark">@d.Category.Name</td>
+
+                            </tr>
+                        }
+                    </table>
+
+
+                    <p class="text-secondary">Destinations listed can be easily accessed from the trail.  In most cases, this does not involve crossing streets or intersections.</p>
+
+                }
+
+        </div>
+        <div class="col-2">
+        </div>
+        
     </div>
 </div>

@@ -67,7 +67,7 @@ namespace BikeToIt.Controllers
         {
 
             List<DestinationCategory> categories = context.DestinationCategories.ToList();
-            List<Trail> trails = context.Trails.ToList();
+            List<Trail> trails = context.Trails.OrderBy(t => t.Name).ToList();
 
             AddDestinationViewModel destination = new AddDestinationViewModel(categories, trails);
 

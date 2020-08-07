@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BikeToIt</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Bike To It</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -28,20 +28,20 @@
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Trail" asp-action="Index">All Trails</a>
+                                <a class="nav-link btn btn-success text-light ml-3" asp-area="" asp-controller="Trail" asp-action="Index">All Trails</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="Index">All Destinations</a>
+                                <a class="nav-link btn btn-success text-light ml-3" asp-area="" asp-controller="Destination" asp-action="Index">All Destinations</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="Add">Add Destination</a>
+                                <a class="nav-link btn btn-success text-light ml-3" asp-area="" asp-controller="Destination" asp-action="Add">Add Destination</a>
                             </li>
 
                         }
                         else if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Destination" asp-action="Add">Add Destination</a>
+                                <a class="nav-link btn btn-success text-light ml-3" asp-area="" asp-controller="Destination" asp-action="Add">Add Destination</a>
                             </li>
                         }
 

@@ -1,8 +1,20 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Bike to It";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div class="jumbotron" style="margin-top:5%">
+                <h1 class="display-2 text-success text-center">Bike To It</h1>
+                <p class="lead text-success text-center">Explore all your bike trails have to offer</p>
+                <hr class="my-4">
+                <p class="text-center">
+                    At Bike To It, we like exploring our communities by bike.  Find local spots for food, shopping, camping, and more, all with direct access to your bike trails.
+                    Know of a local bike friendly spot connected to your trail that we don't know about?  Sign up to contribute and let others know about those great spots!
+                </p><br />
+                <div class="text-center"><a class="btn btn-success btn-lg btn-center" asp-controller="trail" asp-action="search" role="button">Start Your Trail Search</a></div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>

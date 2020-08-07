@@ -1,111 +1,112 @@
 ﻿@model BikeToIt.ViewModels.AddDestinationViewModel
 
-    <form enctype="multipart/form-data" method="post" asp-controller="Destination" asp-action="Add">
-        <div class="container">
-            <div class="form-group">
-                <h2 class="display-5 text-success">Add a Bike Friendly Destination</h2>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryId">Category</label>
-                <select class="form-control form-control-lg" asp-for="CategoryId" asp-items="Model.Category"></select>
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <form enctype="multipart/form-data" method="post" asp-controller="Destination" asp-action="Add">
+                    <div class="container">
+                        <div class="form-group">
+                            <h2 class="display-5 text-success">Add a Bike Friendly Destination</h2>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CategoryId">Category</label>
+                            <select class="form-control form-control-lg" asp-for="CategoryId" asp-items="Model.Category"></select>
 
-            </div>
-            <div class="form-group">
-                <label asp-for="TrailId">Trail</label>
-                <select class="form-control form-control-lg" asp-for="TrailId" asp-items="Model.Trail"></select>
-            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TrailId">Trail</label>
+                            <select class="form-control form-control-lg" asp-for="TrailId" asp-items="Model.Trail"></select>
+                        </div>
 
-            <div class="form-group">
-                <label asp-for="Name"></label>
-                <input class="form-control form-control-lg" asp-for="Name" type="text" />
-                <span style="color:red" asp-validation-for="Name"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Street"></label>
-                <input class="form-control form-control-lg" asp-for="Street" />
-                <span style="color:red" asp-validation-for="Street"></span>
-            </div>
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input class="form-control form-control-lg" asp-for="Name" type="text" />
+                            <span style="color:red" asp-validation-for="Name"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Street"></label>
+                            <input class="form-control form-control-lg" asp-for="Street" />
+                            <span style="color:red" asp-validation-for="Street"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label asp-for="City"></label>
+                                    <input class="form-control form-control-lg" asp-for="City" />
+                                    <span style="color:red" asp-validation-for="City"></span>
+                                </div>
+                                <div class="col">
+                                    <label asp-for="State"></label>
+                                    <input class="form-control form-control-lg" asp-for="State" />
+                                    <span style="color:red" asp-validation-for="State"></span>
+                                </div>
+                                <div class="col">
+                                    <label asp-for="Zipcode"></label>
+                                    <input class="form-control form-control-lg" asp-for="Zipcode" />
+                                    <span style="color:red" asp-validation-for="Zipcode"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Description"></label>
+                            <textarea class="form-control form-control-lg" asp-for="Description">  </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Website"></label>
+                            <input class="form-control form-control-lg" asp-for="Website" type="text" />
+
+                        </div>
 
 
+                        <div class="form-group">
+                            <label>Does it have: </label><br />
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col">
-                        <label asp-for="City"></label>
-                        <input class="form-control form-control-lg" asp-for="City" />
-                        <span style="color:red" asp-validation-for="City"></span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" asp-for="OutdoorSeating" type="checkbox" />
+                                <label class="form-check-label" asp-for="OutdoorSeating"></label>
+
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" asp-for="BikeRacks" type="checkbox" />
+                                <label class="form-check-label" asp-for="BikeRacks"></label>
+
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" asp-for="Restrooms" type="checkbox" />
+                                <label class="form-check-label" asp-for="Restrooms">
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" asp-for="Playground" type="checkbox" />
+                                <label class="form-check-label" asp-for="Playground">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Image">Upload Image</label>
+                            <div class="custom-file">
+                                <input asp-for="Image" class="custom-file-input" id="customFile" />
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+                        <input class="btn btn-success btn-lg btn-block" type="submit" value="Add" />
                     </div>
-                    <div class="col">
-                        <label asp-for="State"></label>
-                        <input class="form-control form-control-lg" asp-for="State" />
-                        <span style="color:red" asp-validation-for="State"></span>
-                    </div>
-                    <div class="col">
-                        <label asp-for="Zipcode"></label>
-                        <input class="form-control form-control-lg" asp-for="Zipcode" />
-                        <span style="color:red" asp-validation-for="Zipcode"></span>
-                    </div>
-                </div>
 
+                    @section scripts{
+                        <script type="text/javascript">// for name of file to appear on upon selection
+                            $(".custom-file-input").on("change", function () {
+                                var fileName = $(this).val().split("\\").pop();
+                                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                            });</script>
+                    }
+
+                </form>
             </div>
-
-            <div class="form-group">
-                <label asp-for="Description"></label>
-                <textarea class="form-control form-control-lg" asp-for="Description">  </textarea>
-            </div>
-            <div class="form-group">
-                <label asp-for="Website"></label>
-                <input class="form-control form-control-lg" asp-for="Website" type="text" />
-
-            </div>
-
-
-            <div class="form-group">
-                <label>Does it have: </label><br />
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" asp-for="OutdoorSeating" type="checkbox" />
-                    <label class="form-check-label" asp-for="OutdoorSeating"></label>
-
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" asp-for="BikeRacks" type="checkbox" />
-                    <label class="form-check-label" asp-for="BikeRacks"></label>
-
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" asp-for="Restrooms" type="checkbox" />
-                    <label class="form-check-label" asp-for="Restrooms">
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" asp-for="Playground" type="checkbox" />
-                    <label class="form-check-label" asp-for="Playground">
-                    </label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Image">Upload Image</label>
-                <div class="custom-file">
-                    <input asp-for="Image" class="custom-file-input" id="customFile" />
-                    <label class="custom-file-label" for="customFile">Choose file</label>
-                </div>
-
-
-            </div>
-
-            <input class="btn btn-success btn-lg btn-block" type="submit" value="Add" />
+            <div class="col-2"></div>
         </div>
-
-        @section scripts{
-            <script type="text/javascript">// for name of file to appear on upon selection
-                $(".custom-file-input").on("change", function () {
-                    var fileName = $(this).val().split("\\").pop();
-                    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-                });</script>
-        }
-
-
-
-    </form>
+    </div>

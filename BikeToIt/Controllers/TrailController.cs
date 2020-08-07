@@ -90,8 +90,7 @@ namespace BikeToIt.Controllers
                 {
                     foreach (Trail trail in allTrails)
                     {
-                        Console.WriteLine(trail.Name.ToLower());
-                        Console.WriteLine(viewModel.Name.ToLower());
+
                         if (trail.Name.ToLower().Contains(viewModel.Name.ToLower()) && !selectedTrails.Contains(trail))
                         {
                             selectedTrails.Add(trail);
@@ -295,39 +294,12 @@ namespace BikeToIt.Controllers
                 }
 
             }
-            List<City> allCities = context.Cities.ToList();
-            List<int> selectedCities = new List<int>();
-            List<City> resultCities = new List<City>();
+            
 
-
-            foreach (Trail trail in selectedTrails.ToList())
-            {
-
-                foreach (TrailCity cityPair in trailCities)
-                {
-
-                    if (cityPair.TrailId == trail.Id && !selectedCities.Contains(cityPair.CityId))
-                    {
-                        selectedCities.Add(cityPair.CityId);
-
-                    }
-
-                }
-
-            }
-
-            foreach(int c in selectedCities)
-            {
-                foreach(City cty in allCities)
-                {
-                    if (c == cty.Id)
-                    {
-                        resultCities.Add(cty);
-                    }
-                }
-            }
+            List<Trail> selectedTrailsAsc = selectedTrails.OrderBy(t => t.Name).ToList();
+            List<TrailCity> trailCitiesAsc = trailCities.OrderBy(c => c.City.Name).ToList();
                            
-            SearchResultsViewModel results = new SearchResultsViewModel(selectedTrails, trailCities);
+            SearchResultsViewModel results = new SearchResultsViewModel(selectedTrailsAsc, trailCitiesAsc);
             return View(results);
         }
 

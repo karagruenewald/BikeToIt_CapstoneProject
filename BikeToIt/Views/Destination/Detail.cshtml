@@ -5,72 +5,81 @@
     }
 </style>
     <div class="container">
-        <div class="row bg-light mb-3 p-3">
-            <div class="col-6">
+        <div class="row ">
+            <div class="col-2">
+            </div>
+            <div class="col-4 bg-light mb-3 p-3">
                 <h3>@Model.Name</h3>
                 <small class="text-muted">@Model.CategoryName</small><br /><br />
                 <span>@Model.Street</span><br />
                 <span>@Model.City,</span><span> @Model.State</span><span> @Model.Zipcode</span><br /><br />
-                <p><a href=@Model.Website>@Model.Website<a /></p>
+                <p><a href=@Model.Website>@Model.Website</a></p>
 
             </div>
-            @if (Model.Image != null)
-            {
-                <div class="col-6">
-                    <div class="card">
-                        <img src="~/images/@Model.Image" alt="@Model.Name" height="300" width="500">
-                    </div>
-                </div>
 
+            <div class="col-4 bg-light mb-3 p-3">
+                @if (Model.Image != null)
+                {
 
-            }
+                    <img src="~/images/@Model.Image" alt="@Model.Name" style="width: 100%; margin-left: auto; margin-right: auto; display: block;">
 
-        </div>
-        <div class="row bg-light mt-3 p-3">
-            <div class="col-12">
-                <p><h5>@Model.Description</h5></p>
+                }
+            </div>
+            <div class="col-2">
+            </div>
+
+     </div>
+     
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-8 bg-light mt-3 p-3">
+                <p style="font-size:large">@Model.Description</p>
+            </div>
+            <div class="col-2">
             </div>
         </div>
-        <div class="row bg-light mt-3 pt-4 pr-3">
-            <div class="col-12">
-                <ul >
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-8 bg-light mt-3 pt-4">
+                <ul>
                     <p class="list-inline-item">Amenities: </p>
                     @if (Model.OutdoorSeating == true)
                     {
-                        <li class="badge badge-secondary badge-success list-inline-item">Outdoor Seating</li>
+                        <li class="badge badge-secondary badge-success list-inline-item p-2">Outdoor Seating</li>
                     }
                     @if (Model.BikeRacks == true)
                     {
-                        <li class="badge  badge-secondary badge-success list-inline-item">Bike Rack</li>
+                        <li class="badge  badge-secondary badge-success list-inline-item p-2">Bike Rack</li>
                     }
                     @if (Model.Restrooms == true)
                     {
-                        <li class="badge badge-secondary badge-success list-inline-item">Restrooms</li>
+                        <li class="badge badge-secondary badge-success list-inline-item p-2">Restrooms</li>
                     }
                     @if (Model.Playground == true)
                     {
-                        <li class="badge badge-secondary badge-success list-inline-item">Playground</li>
+                        <li class="badge badge-secondary badge-success list-inline-item p-2">Playground</li>
                     }
                 </ul>
+                
+            </div>
+            <div class="col-2">
             </div>
         </div>
-        <div class="row bg-light mt-3 pt-3 pl-3 pr-3">
-            <div class="col-6">
-                <p><a class="text-success"asp-controller="Trail" asp-action="Detail" asp-route-id="@Model.TrailId"> <--Back to @Model.TrailName</a></p>
+        <div class="row">
+            
+
+            <div class="col-6 mt-3">
+                <p><a class="text-success" asp-controller="Trail" asp-action="Detail" asp-route-id="@Model.TrailId"> <--Back to @Model.TrailName</a></p>
             </div>
-
-            @if (User.Identity.IsAuthenticated)
-            {
-                <div class="col-6">
+            <div class="col-6 mt-3">
+                @if (User.Identity.IsAuthenticated)
+                {
                     <p class="text-right"><a class="text-success" asp-controller="Destination" asp-action="Edit" asp-route-id="@Model.Id">Edit @Model.Name--></a></p>
-                </div>
 
-            }
+                }
+            </div>
             
         </div>
-
-
-
-
-
     </div>
