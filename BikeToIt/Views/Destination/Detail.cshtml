@@ -74,7 +74,7 @@
                 <p><a class="text-success" asp-controller="Trail" asp-action="Detail" asp-route-id="@Model.TrailId"> <--Back to @Model.TrailName</a></p>
             </div>
             <div class="col-6 mt-3">
-                @if (User.Identity.IsAuthenticated)
+                @if (User.IsInRole("Admin"))
                 {
                     <p class="text-right"><a class="text-success" asp-controller="Destination" asp-action="Edit" asp-route-id="@Model.Id">Edit @Model.Name--></a></p>
 
