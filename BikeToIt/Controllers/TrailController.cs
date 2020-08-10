@@ -262,8 +262,8 @@ namespace BikeToIt.Controllers
 
                                 }
 
-                            }
-                            if (!cats.OrderBy(m => m).SequenceEqual(categories.OrderBy(m => m)))
+                            } // if trail destination categories list(cats) doesn't contain categories checked(categories), remove trail
+                            if (!categories.All(i => cats.Contains(i)))
                             {
                                 selectedTrails.Remove(trail);
                             }
