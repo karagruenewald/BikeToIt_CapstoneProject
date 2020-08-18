@@ -2,14 +2,9 @@
 @model List<Destination>
 
 
-<style>
-    td {
-        font-size: ;
-    }
-</style>
 
     <div class="container">
-        <table class=" table centered-table">
+        <table class=" table centered-table" style="font-size:small">
             <h1 class="text-success">All Destinations</h1>
             <p><u><a class="text-dark" asp-controller="Destination" asp-action="Add">Add Destination</a></u></p>
 
@@ -22,6 +17,7 @@
                 <th >Website</th>
                 <th >Amenities</th>
                 <th >Image</th>
+                <th>UserId</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -80,6 +76,7 @@
 
                 }
             </td>
+            <td>@d.UserId</td>
             <td><a class="btn btn-success text-light" asp-controller="Destination" asp-action="Detail" asp-route-id="@d.Id">Details</a></td>
             <td><a class="btn btn-success text-light" asp-controller="Destination" asp-action="Edit" asp-route-id="@d.Id">Edit</a></td>
             <td><a class="btn btn-success text-light" asp-controller="Destination" asp-action="Delete" asp-route-id="@d.Id">Delete</a></td>

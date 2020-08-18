@@ -1,0 +1,157 @@
+﻿@model BikeToIt.ViewModels.AllUserDestinations
+
+@if (Model.NotYetApprovedDestinations.Count > 0)
+{
+
+    <div class="container">
+        <table class=" table centered-table">
+            <h2 class="text-warning">Under Review<span style="font-size:large" class="text-dark">   Thanks for contributing! These destinations are being reviewed by our team.</span></h2>
+
+            <tr>
+
+                <th>Trail</th>
+                <th>Destination Name</th>
+                <th colspan="2">Address</th>
+                <th>Category</th>
+                <th>Website</th>
+                <th>Amenities</th>
+                <th>Image</th>
+
+
+            </tr>
+
+            @foreach (var d in Model.NotYetApprovedDestinations)
+            {
+
+                <tr>
+
+                    <td>@d.Trail.Name</td>
+                    <td>@d.Name</td>
+                    <td colspan="2">@d.Street @d.City, @d.State @d.Zipcode</td>
+
+                    <td>@d.Category.Name</td>
+                    <td><a href=@d.Website>Website</a></td>
+                    <td>
+                        <ul class="list-group">
+                            @if (d.OutdoorSeating == true)
+                            {
+                                <li class="list-group-item">Outdoor Seating</li>
+
+                            }
+                            @if (d.BikeRacks == true)
+                            {
+                                <li class="list-group-item">Bike Racks</li>
+                            }
+                            @if (d.Restrooms == true)
+                            {
+                                <li class="list-group-item">Restrooms</li>
+                            }
+                            @if (d.Playground == true)
+                            {
+                                <li class="list-group-item">Playground</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        @if (d.Image != null)
+                        {
+
+                            <div class="row bg-light">
+                                <div>
+                                    <div>
+                                        <img src="~/images/@d.Image" alt="@d.Name" style="width: 100%; margin-left: auto; margin-right: auto; display: block;">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        }
+                    </td>
+
+
+                </tr>
+            }
+
+
+        </table>
+    </div>
+}
+
+@if (Model.ApprovedDestinations.Count > 0)
+{
+    <div class="container">
+        <table class=" table centered-table">
+            <h2 class="text-success">Destinations You've Contributed</h2>
+            
+
+            <tr>
+
+                <th>Trail</th>
+                <th>Destination Name</th>
+                <th colspan="2">Address</th>
+                <th>Category</th>
+                <th>Website</th>
+                <th>Amenities</th>
+                <th>Image</th>
+
+
+            </tr>
+
+            @foreach (var d in Model.ApprovedDestinations)
+            {
+
+                <tr>
+
+                    <td>@d.Trail.Name</td>
+                    <td>@d.Name</td>
+                    <td colspan="2">@d.Street @d.City, @d.State @d.Zipcode</td>
+
+                    <td>@d.Category.Name</td>
+                    <td><a href=@d.Website>Website</a></td>
+                    <td>
+                        <ul class="list-group">
+                            @if (d.OutdoorSeating == true)
+                            {
+                                <li class="list-group-item">Outdoor Seating</li>
+
+                            }
+                            @if (d.BikeRacks == true)
+                            {
+                                <li class="list-group-item">Bike Racks</li>
+                            }
+                            @if (d.Restrooms == true)
+                            {
+                                <li class="list-group-item">Restrooms</li>
+                            }
+                            @if (d.Playground == true)
+                            {
+                                <li class="list-group-item">Playground</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        @if (d.Image != null)
+                        {
+
+                            <div class="row bg-light">
+                                <div>
+                                    <div>
+                                        <img src="~/images/@d.Image" alt="@d.Name" style="width: 100%; margin-left: auto; margin-right: auto; display: block;">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        }
+                    </td>
+
+
+                </tr>
+            }
+
+
+        </table>
+    </div>
+
+}
+

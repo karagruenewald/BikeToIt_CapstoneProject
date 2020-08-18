@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -33,6 +34,11 @@
                             <li class="nav-item">
                                 <a class="nav-link btn btn-success text-light ml-3" asp-area="" asp-controller="Destination" asp-action="Index">All Destinations</a>
                             </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-success text-warning ml-3" asp-area="" asp-controller="Destination" asp-action="NeedingAdminApproval">Pending Destinations</a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link btn btn-success text-light ml-3" asp-area="" asp-controller="Destination" asp-action="Add">Add Destination</a>
                             </li>
@@ -42,6 +48,9 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link btn btn-success text-light ml-3" asp-area="" asp-controller="Destination" asp-action="Add">Add Destination</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-success text-light ml-3" asp-area="" asp-controller="Destination" asp-action="UserDestinations">My Contributed Destinations</a>
                             </li>
                         }
 

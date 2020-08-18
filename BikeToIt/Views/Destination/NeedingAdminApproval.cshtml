@@ -1,0 +1,90 @@
+﻿@using BikeToIt.Models
+@model List<UserDestination>
+
+
+    <div class="container">
+        <table class=" table centered-table" style="font-size:small">
+            <h1 class="text-warning">Destinations waiting for approval</h1>
+            
+
+            <tr>
+                <th>Id</th>
+                <th>Trail_Location</th>
+                <th>Destination_Name</th>
+                <th colspan="2">Address</th>
+                <th>Category</th>
+                <th>Website</th>
+                <th>Amenities</th>
+                <th>Image</th>
+                <th>UserId</th>
+                <th></th>
+                <th></th>
+                
+
+            </tr>
+            @if (Model.Count == 0)
+            {
+                <h2 style="color:red">There are no destinations waiting for approval.</h2>
+            }
+
+
+            @foreach (var d in Model)
+            {
+
+                <tr>
+                    <td>@d.Id</td>
+                    <td>@d.Trail.Name</td>
+                    <td>@d.Name</td>
+                    <td colspan="2">@d.Street @d.City, @d.State @d.Zipcode</td>
+
+                    <td>@d.Category.Name</td>
+                    <td><a href=@d.Website>Website</a></td>
+                    <td>
+                        <ul class="list-group">
+                            @if (d.OutdoorSeating == true)
+                            {
+                                <li class="list-group-item">Outdoor Seating</li>
+
+                            }
+                            @if (d.BikeRacks == true)
+                            {
+                                <li class="list-group-item">Bike Racks</li>
+                            }
+                            @if (d.Restrooms == true)
+                            {
+                                <li class="list-group-item">Restrooms</li>
+                            }
+                            @if (d.Playground == true)
+                            {
+                                <li class="list-group-item">Playground</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        @if (d.Image != null)
+                        {
+
+                            <div class="row bg-light">
+                                <div>
+                                    <div>
+                                        <img src="~/images/@d.Image" alt="@d.Name" style="width: 100%; margin-left: auto; margin-right: auto; display: block;">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        }
+                    </td>
+                    <td>@d.UserId</td>
+                    <td><form method="post" asp-controller="Destination" asp-action="NeedingAdminApproval" asp-route-id="@d.Id"><input type="submit" class="btn btn-success text-light" value="Approve"/></form></td>
+                    <td><a class="btn btn-success text-light" asp-controller="Destination" asp-action="EditUserDestination" asp-route-id="@d.Id">Edit</a></td>
+                   
+
+
+
+                </tr>
+            }
+
+
+        </table>
+    </div>

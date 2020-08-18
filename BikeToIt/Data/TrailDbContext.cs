@@ -13,6 +13,7 @@ namespace BikeToIt.Data
         public DbSet<DestinationCategory> DestinationCategories { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<TrailCity> TrailCity { get; set; }
+        public DbSet<UserDestination> UserDestinations { get; set; }
 
         public TrailDbContext(DbContextOptions<TrailDbContext> options) : base(options)
         {

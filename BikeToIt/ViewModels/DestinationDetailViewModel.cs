@@ -34,8 +34,7 @@ namespace BikeToIt.ViewModels
             City = theDestination.City;
             State = theDestination.State;
             Zipcode = theDestination.Zipcode;
-            Description = theDestination.Description;
-            Website = theDestination.Website;
+            Description = theDestination.Description;            
             OutdoorSeating = theDestination.OutdoorSeating;
             BikeRacks = theDestination.BikeRacks;
             Restrooms = theDestination.Restrooms;
@@ -46,6 +45,14 @@ namespace BikeToIt.ViewModels
             TrailName = trail.Name;
             Image = theDestination.Image;
 
+            if (!theDestination.Website.StartsWith("http"))
+            {
+                Website = "https://" + theDestination.Website;
+            }
+            else
+            {
+                Website = theDestination.Website;
+            }
 
             
             
