@@ -13,7 +13,7 @@
                 <th>Destination_Name</th>
                 <th colspan="2">Address</th>
                 <th>Category</th>
-                <th>Website</th>
+                <th>Website (Check link)</th>
                 <th>Amenities</th>
                 <th>Image</th>
                 <th>UserId</th>
@@ -38,7 +38,7 @@
                     <td colspan="2">@d.Street @d.City, @d.State @d.Zipcode</td>
 
                     <td>@d.Category.Name</td>
-                    <td><a href=@d.Website>Website</a></td>
+                    <td><a href=@d.Website target="_blank">@d.Website</a></td>
                     <td>
                         <ul class="list-group">
                             @if (d.OutdoorSeating == true)

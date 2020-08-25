@@ -45,16 +45,23 @@ namespace BikeToIt.ViewModels
             TrailName = trail.Name;
             Image = theDestination.Image;
 
-            if (!theDestination.Website.StartsWith("http"))
+            if(theDestination.Website != null && theDestination.Website != "")
             {
-                Website = "https://" + theDestination.Website;
+                if (!theDestination.Website.StartsWith("http"))
+                {
+                    Website = "https://" + theDestination.Website;
+                }
+                else
+                {
+                    Website = theDestination.Website;
+                }
             }
             else
             {
-                Website = theDestination.Website;
+                Website = null;
             }
 
-            
+           
             
         }
 

@@ -13,7 +13,11 @@
                 <small class="text-muted">@Model.CategoryName</small><br /><br />
                 <span>@Model.Street</span><br />
                 <span>@Model.City,</span><span> @Model.State</span><span> @Model.Zipcode</span><br /><br />
-                <p><a href=@Model.Website>@Model.Website</a></p>
+
+                @if(Model.Website != null && Model.Website != "")
+                { 
+                <p><a href=@Model.Website target="_blank">@Model.Website</a></p>
+                }
 
             </div>
 

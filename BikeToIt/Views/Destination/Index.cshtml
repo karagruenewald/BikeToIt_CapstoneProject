@@ -39,7 +39,23 @@
             <td colspan="2">@d.Street @d.City, @d.State @d.Zipcode</td>
 
             <td>@d.Category.Name</td>
-            <td><a href=@d.Website>Website</a></td>
+            @if (d.Website != null)
+            {
+                if (d.Website.StartsWith("http"))
+                {
+                    <td><a href=@d.Website target="_blank">Website</a></td>
+                }
+                else
+                {
+                    <td><a href="https://@d.Website" target="_blank">Website</a></td>
+                }
+
+            }
+            else
+            {
+                <td>No website listed</td>
+            }
+
             <td>
                 <ul class="list-group">
                     @if (d.OutdoorSeating == true)
