@@ -1,9 +1,23 @@
 ﻿@model BikeToIt.ViewModels.DestinationDetailViewModel
-<style>
-    ul {
-        font-size: 20px;
-    }
-</style>
+
+<!DOCTYPE html>
+
+<header>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1yYZxTePNdmAPGIADdqFKYv_eFJzD2e8&callback=initMap"></script>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%
+        }
+        ul {
+            font-size: 20px;
+        }
+    </style>
+
+</header>
+<body>
     <div class="container">
         <div class="row ">
             <div class="col-2">
@@ -14,9 +28,9 @@
                 <span>@Model.Street</span><br />
                 <span>@Model.City,</span><span> @Model.State</span><span> @Model.Zipcode</span><br /><br />
 
-                @if(Model.Website != null && Model.Website != "")
-                { 
-                <p><a href=@Model.Website target="_blank">@Model.Website</a></p>
+                @if (Model.Website != null && Model.Website != "")
+                {
+                    <p><a href=@Model.Website target="_blank">@Model.Website</a></p>
                 }
 
             </div>
@@ -32,8 +46,17 @@
             <div class="col-2">
             </div>
 
-     </div>
-     
+        </div>
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-8 bg-light mt-3 p-3" id="map">
+               
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-2">
             </div>
@@ -66,13 +89,13 @@
                         <li class="badge badge-secondary badge-success list-inline-item p-2">Playground</li>
                     }
                 </ul>
-                
+
             </div>
             <div class="col-2">
             </div>
         </div>
         <div class="row">
-            
+
 
             <div class="col-6 mt-3">
                 <p><a class="text-success" asp-controller="Trail" asp-action="Detail" asp-route-id="@Model.TrailId"> <--Back to @Model.TrailName</a></p>
@@ -84,6 +107,46 @@
 
                 }
             </div>
-            
+
         </div>
     </div>
+    <script type="text/javascript" >
+
+        function initMap() {
+            let location = "@Model.Street @Model.City, @Model.State @Model.Zipcode";
+            axios.get('https://maps.googleapis.com/maps/api/geocode/json?', {
+                params: {
+                    address: location,
+                    key: "AIzaSyB1yYZxTePNdmAPGIADdqFKYv_eFJzD2e8"
+                }
+
+            })
+                .then(function (response) {
+
+                    //grab lat & lng & create map and add bike layer
+
+                    let outputLatitude = response.data.results[0].geometry.location.lat;
+                    let outputLongitude = response.data.results[0].geometry.location.lng;
+                    let options = {
+                        center: { lat: outputLatitude, lng: outputLongitude },
+                        zoom: 18
+                    }
+
+                    let map = new google.maps.Map(document.getElementById("map"), options);
+
+
+
+                    let bikeLayer = new google.maps.BicyclingLayer();
+                    bikeLayer.setMap(map);
+                    
+                    console.log(response.data.results[0].formatted_address);
+                })
+                
+                .catch(function(error) {
+                    console.log(error);
+                })
+        }
+        
+    </script>
+    <script ></script>
+</body>
